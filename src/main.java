@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
-
+import java.util.Scanner;
 
 public class main {
 
@@ -11,12 +11,29 @@ public class main {
 		BufferedReader reader = null;
 		String contentLine;
 		int line;
-		final File folder = new File("./srt_files");
-		for (final File file : folder.listFiles()) {
-			System.out.println(file.getName().split("\\.")[0]);
-//			System.out.println(file.getName().substring(22, file.getName().length()-13));
+		boolean sepFiles = false;
+		
+		Scanner sc = new Scanner(System.in);
+		
+		final File srtFolder = new File("./srt_files");
+		
+		if (srtFolder.listFiles().length > 1) {
+			System.out.println("Would you like to produce separated .txt files?");
+			String str = sc.nextLine();
+			if (str.equalsIgnoreCase("Y")) {
+				sepFiles = true;
+	        }
+		}
+		sc.close();
+		for (final File file : srtFolder.listFiles()) {
+			
+			if(!sepFiles) {
+				System.out.println(file.getName().split("\\.")[0]);
+				// System.out.println(file.getName().substring(22, file.getName().length()-13));
 
-			System.out.println("");
+				System.out.println("");
+			}
+			
 			try {
 				reader = new BufferedReader(new FileReader("./srt_files/"+file.getName()));
 			} catch (FileNotFoundException e) {
