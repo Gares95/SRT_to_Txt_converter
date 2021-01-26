@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class main {
+public class SRT_to_TXT_converter {
 
 	public static void main(String[] args){
 		BufferedReader reader = null;
