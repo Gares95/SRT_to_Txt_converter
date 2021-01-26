@@ -62,13 +62,6 @@ public class SRT_to_TXT_converter {
 			
 			else {
 				outFile = new File(txtFolder + "/" + file.getName().split("\\.")[0] + ".txt");
-				try {
-					writer = new FileWriter(outFile.getAbsoluteFile());
-			        BufferedWriter bw = new BufferedWriter(writer);
-			        bw.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
 			
 			try {
@@ -90,24 +83,19 @@ public class SRT_to_TXT_converter {
 						case 2:
 							
 							char lst = contentLine.charAt(contentLine.length()-1);
-							
+							writer = new FileWriter(outFile.getAbsoluteFile(), true);
+					        BufferedWriter bw = new BufferedWriter(writer);
 							if (lst == '.') {
 								// System.out.println(contentLine);
-								writer = new FileWriter(outFile.getAbsoluteFile(), true);
-						        BufferedWriter bw = new BufferedWriter(writer);
 						        bw.write(contentLine + "\n");
 						        bw.close();
 							}
 							else {
 								// System.out.print(contentLine + " ");
-								writer = new FileWriter(outFile.getAbsoluteFile(), true);
-						        BufferedWriter bw = new BufferedWriter(writer);
 						        bw.write(contentLine + " ");
-						        bw.close();
 							}
-								
+					        bw.close();	
 							break;
-							
 							
 						case 3:
 							break;
