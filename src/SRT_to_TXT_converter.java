@@ -17,6 +17,13 @@ public class SRT_to_TXT_converter {
 		
 		final File srtFolder = new File("./srt_files");
 		
+		
+		
+		final File txtFolder = new File("./txt_files");
+		if (! txtFolder.exists()){
+			txtFolder.mkdir();
+		}
+		
 		if (srtFolder.listFiles().length > 1) {
 			System.out.println("Would you like to produce separated .txt files?");
 			String str = sc.nextLine();
