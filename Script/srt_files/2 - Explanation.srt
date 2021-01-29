@@ -1,0 +1,15 @@
+1
+00:00:01,610 --> 00:00:03,825
+Another auxiliar file to test the example.
+
+2
+00:00:03,825 --> 00:00:04,630
+This is a text example,
+
+3
+00:00:06,530 --> 00:00:8,199
+here is another one.
+
+5
+00:00:12,539 --> 00:00:15,599
+Goodbye.
