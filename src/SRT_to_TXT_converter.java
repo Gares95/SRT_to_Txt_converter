@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class SRT_to_TXT_converter {
@@ -44,27 +43,23 @@ public class SRT_to_TXT_converter {
 			
 			if(!sepFiles) {
 				outFile = new File(txtFolder + "/" + srtFolder.listFiles()[0].getName().split("\\.")[0] + ".txt");
-				// outFile = new File(txtFolder + "/" + srtFolder.listFiles()[0].getName().substring(22, srtFolder.listFiles()[0].getName().length()-13) + ".txt");
-			    
+				
 				try{
 					outFile.createNewFile();
 			        writer = new FileWriter(outFile.getAbsoluteFile(), true);
 			        BufferedWriter bw = new BufferedWriter(writer);
 			        bw.write(file.getName().split("\\.")[0] + "\n");
-			        // bw.write(file.getName().substring(22, file.getName().length()-13) + "\n");
 			        bw.close();
 			    }
 			    catch (IOException e){
 			        e.printStackTrace();
 			        System.exit(-1);
 			    }
-				
 			}
 			
 			else {
 				outFile = new File(txtFolder + "/" + file.getName().split("\\.")[0] + ".txt");
-				// outFile = new File(txtFolder + "/" + file.getName().substring(22, file.getName().length()-13) + ".txt");
-			    
+				
 				if (outFile.exists() && outFile.isFile()) 
 			    	outFile.delete(); 
 			    try {
@@ -107,6 +102,7 @@ public class SRT_to_TXT_converter {
 				}
 				bw.write("\n");
 				bw.close();	
+				reader.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
