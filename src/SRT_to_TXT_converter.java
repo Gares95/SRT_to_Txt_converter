@@ -26,23 +26,22 @@ public class SRT_to_TXT_converter {
 		}
 		
 		if (srtFolder.listFiles().length > 1) {
-			System.out.println("Would you like to produce separated .txt files?");
+			System.out.println("Would you like to produce separated .txt files [y/n]?");
 			String str = sc.nextLine();
-			if (str.equalsIgnoreCase("Y")||str.equals("")) {
+			if (str.equalsIgnoreCase("Y")) {
 				sepFiles = true;
 	        }
 		}
-		
-		if(!sepFiles) {
-			outFile = new File(txtFolder + "/" + srtFolder.listFiles()[0].getName().split("\\.")[0] + ".txt");
-			if (outFile.exists() && outFile.isFile()) 
-		    	outFile.delete(); 
-		}
 		sc.close();
+
+		outFile = new File(txtFolder + "/" + srtFolder.listFiles()[0].getName().split("\\.")[0] + ".txt");
+		if (outFile.exists() && outFile.isFile()) 
+	    	outFile.delete(); 
+	    	
+		
 		for (final File file : srtFolder.listFiles()) {
 			
 			if(!sepFiles) {
-				outFile = new File(txtFolder + "/" + srtFolder.listFiles()[0].getName().split("\\.")[0] + ".txt");
 				
 				try{
 					outFile.createNewFile();
@@ -59,9 +58,9 @@ public class SRT_to_TXT_converter {
 			
 			else {
 				outFile = new File(txtFolder + "/" + file.getName().split("\\.")[0] + ".txt");
-				
 				if (outFile.exists() && outFile.isFile()) 
 			    	outFile.delete(); 
+			    	
 			    try {
 					outFile.createNewFile();
 				} catch (IOException e) {
@@ -108,4 +107,5 @@ public class SRT_to_TXT_converter {
 			}
 	    }
 	}
+	
 }
