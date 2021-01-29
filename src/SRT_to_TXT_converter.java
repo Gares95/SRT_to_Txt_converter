@@ -34,23 +34,24 @@ public class SRT_to_TXT_converter {
 	        }
 		}
 		
-		/*if(!sepFiles)
+		if(!sepFiles) {
 			outFile = new File(txtFolder + "/" + srtFolder.listFiles()[0].getName().split("\\.")[0] + ".txt");
-		*/
+			if (outFile.exists() && outFile.isFile()) 
+		    	outFile.delete(); 
+		}
 		sc.close();
 		for (final File file : srtFolder.listFiles()) {
 			
 			if(!sepFiles) {
-				/*System.out.println(file.getName().split("\\.")[0] + "\n");
-				// System.out.println(file.getName().substring(22, file.getName().length()-13));
-
-				System.out.println("");
-				*/
 				outFile = new File(txtFolder + "/" + srtFolder.listFiles()[0].getName().split("\\.")[0] + ".txt");
+				// outFile = new File(txtFolder + "/" + srtFolder.listFiles()[0].getName().substring(22, srtFolder.listFiles()[0].getName().length()-13) + ".txt");
+			    
 				try{
+					outFile.createNewFile();
 			        writer = new FileWriter(outFile.getAbsoluteFile(), true);
 			        BufferedWriter bw = new BufferedWriter(writer);
 			        bw.write(file.getName().split("\\.")[0] + "\n");
+			        // bw.write(file.getName().substring(22, file.getName().length()-13) + "\n");
 			        bw.close();
 			    }
 			    catch (IOException e){
@@ -62,16 +63,23 @@ public class SRT_to_TXT_converter {
 			
 			else {
 				outFile = new File(txtFolder + "/" + file.getName().split("\\.")[0] + ".txt");
+				// outFile = new File(txtFolder + "/" + file.getName().substring(22, file.getName().length()-13) + ".txt");
+			    
+				if (outFile.exists() && outFile.isFile()) 
+			    	outFile.delete(); 
+			    try {
+					outFile.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} 
 			}
 			
 			try {
 				reader = new BufferedReader(new FileReader("./srt_files/"+file.getName()));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			try {
+				writer = new FileWriter(outFile.getAbsoluteFile(), true);
+		        BufferedWriter bw = new BufferedWriter(writer);
 				contentLine = reader.readLine();
-			
+		        
 				while (contentLine != null) {
 					for (int i=0;i<4;i++) {
 						switch (i) {
@@ -81,35 +89,27 @@ public class SRT_to_TXT_converter {
 						case 1:
 							break;
 						case 2:
-							
 							char lst = contentLine.charAt(contentLine.length()-1);
-							writer = new FileWriter(outFile.getAbsoluteFile(), true);
-					        BufferedWriter bw = new BufferedWriter(writer);
+							
 							if (lst == '.') {
-								// System.out.println(contentLine);
 						        bw.write(contentLine + "\n");
-						        bw.close();
 							}
 							else {
-								// System.out.print(contentLine + " ");
 						        bw.write(contentLine + " ");
 							}
-					        bw.close();	
 							break;
 							
 						case 3:
 							break;
 						}
-						
 						contentLine = reader.readLine();
 					}
 				}
+				bw.write("\n");
+				bw.close();	
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println("");
 	    }
-		
 	}
-
 }
