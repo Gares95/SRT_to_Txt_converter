@@ -33,11 +33,14 @@ public class SRT_to_TXT_converter {
 	        }
 		}
 		sc.close();
+		
+		try {
+			deleteDirectory(txtFolder);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
 		outFile = new File(txtFolder + "/" + srtFolder.listFiles()[0].getName().split("\\.")[0] + ".txt");
-		if (outFile.exists() && outFile.isFile()) 
-	    	outFile.delete(); 
-	    	
 		
 		for (final File file : srtFolder.listFiles()) {
 			
@@ -58,9 +61,7 @@ public class SRT_to_TXT_converter {
 			
 			else {
 				outFile = new File(txtFolder + "/" + file.getName().split("\\.")[0] + ".txt");
-				if (outFile.exists() && outFile.isFile()) 
-			    	outFile.delete(); 
-			    	
+							    	
 			    try {
 					outFile.createNewFile();
 				} catch (IOException e) {
@@ -106,6 +107,18 @@ public class SRT_to_TXT_converter {
 				e.printStackTrace();
 			}
 	    }
+	}
+	
+	static void deleteDirectory (File file) throws IOException{
+		if (file.isDirectory()){
+			for (File sfile : file.listFiles()) {
+				if (!sfile.delete()) {
+					throw new IOException ("Failed to delete files; " + sfile);
+				}
+			}
+			
+		}
+		
 	}
 	
 }
