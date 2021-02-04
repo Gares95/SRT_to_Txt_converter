@@ -21,5 +21,5 @@ After executing the script converting _srt files_ in a _Single file_:
 
 *Note:* The resulting file is named after the first _srt_ file in _srt_files_ folder.
 
-After executing the script converting _srt files_ in _Separated files file_:
+After executing the script converting _srt files_ into _Separated files_:
 ![alt text](https://raw.githubusercontent.com/Gares95/SRT_to_Txt_converter/master/Img/Sep%20Files.PNG)
