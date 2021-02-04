@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class SRT_to_TXT_converter {
@@ -44,7 +45,22 @@ public class SRT_to_TXT_converter {
 		outFile = new File(txtFolder + "/" + srtFolder.listFiles()[0].getName().split("\\.")[0] + ".txt");
 		
 		File[] inputFiles = srtFolder.listFiles();
-		Arrays.sort(inputFiles);
+		
+		if(checkAllNumberNames(inputFiles)) {
+			Arrays.sort(inputFiles, new Comparator<File>() {
+			    public int compare(File f1, File f2) {
+			        try {
+			            int i1 = Integer.parseInt(f1.getName().substring(0, 2).replaceAll("\\s+",""));
+			            int i2 = Integer.parseInt(f2.getName().substring(0, 2).replaceAll("\\s+",""));
+			            return i1 - i2;
+			        } catch(NumberFormatException e) {
+			            throw new AssertionError(e);
+			        }
+			    }
+			});
+		}
+		else
+			Arrays.sort(inputFiles);
 		
 		for (final File file : inputFiles) {
 			
@@ -123,6 +139,19 @@ public class SRT_to_TXT_converter {
 			
 		}
 		
+	}
+	
+	static boolean checkAllNumberNames(File [] inputFiles) throws NumberFormatException{
+		for (final File file : inputFiles) {
+			file.getName().substring(0, 1);
+			
+			try {
+		        Integer.parseInt(file.getName().substring(0, 1));
+		    } catch (NumberFormatException nfe) {
+		        return false;
+		    }
+		}
+		return true;
 	}
 	
 }
