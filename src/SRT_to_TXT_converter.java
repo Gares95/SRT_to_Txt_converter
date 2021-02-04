@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class SRT_to_TXT_converter {
@@ -42,7 +43,10 @@ public class SRT_to_TXT_converter {
 
 		outFile = new File(txtFolder + "/" + srtFolder.listFiles()[0].getName().split("\\.")[0] + ".txt");
 		
-		for (final File file : srtFolder.listFiles()) {
+		File[] inputFiles = srtFolder.listFiles();
+		Arrays.sort(inputFiles);
+		
+		for (final File file : inputFiles) {
 			
 			if(!sepFiles) {
 				
